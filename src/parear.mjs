@@ -21,7 +21,7 @@ async function iniciar() {
   const { version } = await fetchLatestBaileysVersion().catch(() => ({ version: undefined }));
   const sock = makeWASocket({
     version, auth: state, logger,
-    browser: Browsers.windows('Leitor DS'),
+    browser: Browsers.windows('Chrome'),
     markOnlineOnConnect: false, syncFullHistory: false,
   });
   sock.ev.on('creds.update', saveCreds);

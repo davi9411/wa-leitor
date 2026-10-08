@@ -55,6 +55,7 @@ function acharChat(db, filtro) {
   const todos = db.prepare('SELECT jid, nome, grupo, ultima_ts FROM chats ORDER BY ultima_ts DESC').all();
   const achados = todos.filter((c) => semAcento(c.nome).includes(f) || c.jid.includes(filtro));
   if (achados.length === 1) return achados[0];
+  if (!achados.length && /^\d{10,15}$/.test(filtro)) return { jid: `${filtro}@s.whatsapp.net`, nome: filtro, grupo: 0 }; // número completo (DDI+DDD)
   if (!achados.length) { console.error(`Nenhuma conversa com "${filtro}". Use: wa chats`); process.exit(1); }
   console.error(`Mais de uma conversa com "${filtro}". Seja mais específico:`);
   achados.slice(0, 10).forEach((c) => console.error(`  ${c.nome || '(sem nome)'}  [${c.jid}]`));

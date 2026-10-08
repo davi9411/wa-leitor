@@ -175,7 +175,7 @@ async function conectar() {
   const { version } = await fetchLatestBaileysVersion().catch(() => ({ version: undefined }));
   sock = makeWASocket({
     version, auth: state, logger,
-    browser: Browsers.windows('Leitor DS'),
+    browser: Browsers.windows('Chrome'),
     markOnlineOnConnect: false,   // o celular continua recebendo as notificações
     syncFullHistory: false,
     generateHighQualityLinkPreview: false,
