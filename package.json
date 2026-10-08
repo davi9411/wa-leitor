@@ -1,0 +1,1 @@
+{"name":"wa-leitor","version":"0.1.0","private":true,"type":"module","description":"Leitor local de WhatsApp (somente leitura) com liga/desliga","scripts":{"wa":"node src/cli.mjs"},"engines":{"node":">=22.5"},"dependencies":{"@whiskeysockets/baileys":"^7.0.0-rc14","pino":"^10.4.0"}}
