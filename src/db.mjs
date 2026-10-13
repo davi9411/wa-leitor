@@ -30,7 +30,7 @@ export function abrirDb() {
       PRIMARY KEY (chat, id)
     );
     CREATE INDEX IF NOT EXISTS ix_msgs_chat_ts ON msgs (chat, ts);
-    -- Fila de envio. Só é preenchida por "wa enviar", que só roda a pedido explícito do Davi.
+    -- Fila de envio. Só é preenchida por "wa enviar", sempre por comando explícito do usuário.
     CREATE TABLE IF NOT EXISTS outbox (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       chat TEXT NOT NULL,

@@ -1,5 +1,5 @@
 // Listener: recebe mensagens, grava no SQLite e baixa a mídia. Não marca "online" e não lê (sem visto azul).
-// Só envia o que estiver na fila "outbox", que é preenchida exclusivamente por "wa enviar" (pedido do Davi).
+// Só envia o que estiver na fila "outbox", que é preenchida exclusivamente por "wa enviar" (comando explícito do usuário).
 import makeWASocket, * as B from '@whiskeysockets/baileys';
 import pino from 'pino';
 import { writeFileSync, mkdirSync, unlinkSync, readFileSync } from 'node:fs';
@@ -119,7 +119,7 @@ async function salvar(msg, { baixar }) {
   insMsg.run(jid, key.id, ts, key.fromMe ? 1 : 0, de, c.tipo, c.texto ?? null, arquivo, mime, c.dur ? num(c.dur) : null);
 }
 
-// ---------- envio (fila "outbox", preenchida só por "wa enviar" a pedido do Davi) ----------
+// ---------- envio (fila "outbox", preenchida só por "wa enviar", comando explícito do usuário) ----------
 const MIME = { pdf: 'application/pdf', zip: 'application/zip', ex5: 'application/octet-stream', mq5: 'text/plain', set: 'text/plain', txt: 'text/plain', jpg: 'image/jpeg', jpeg: 'image/jpeg', png: 'image/png', mp4: 'video/mp4', ogg: 'audio/ogg', mp3: 'audio/mpeg' };
 const ATRASO_MAX_S = Number(process.env.WA_ATRASO_MAX_MIN || 30) * 60; // envio programado vencido há mais que isso NÃO sai
 const venceu = db.prepare(`SELECT * FROM outbox WHERE status = 'pendente' AND enviar_em <= ? ORDER BY enviar_em, id LIMIT 5`);

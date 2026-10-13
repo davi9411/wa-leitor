@@ -232,7 +232,7 @@ if (!CMDS[cmd]) {
   wa chats [filtro]          conversas recentes
   wa ler <nome> [--horas N]  mostra a conversa (texto, transcrições, caminhos de mídia)
   wa preparar <nome>         transcreve áudios/vídeos e extrai frames (sob demanda)
-  wa enviar <nome> --texto "..." [--arquivo f]... [--em "16:30"]   envia (ou programa) — só a pedido do Davi
+  wa enviar <nome> --texto "..." [--arquivo f]... [--em "16:30"]   envia (ou programa), sempre por comando explícito
   wa fila                    envios pendentes/recentes
   wa cancelar <id>           cancela envio programado`);
   process.exit(cmd ? 1 : 0);
